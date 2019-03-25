@@ -14,9 +14,13 @@ window.onload = function (){
     
 
     function showNotification(info) {
+// disabled by user before ?
+        if (window.localStorage.getItem('displayInfoNotification')) {
+            return false
+        }
 // root    
         let notification = document.createElement('section')
-        notification.setAttribute('class', 'notification hide')
+        notification.setAttribute('class', 'notification')
 
 // container for info        
         let notificationsContainer = document.createElement('div')
@@ -91,9 +95,9 @@ window.onload = function (){
         let notificationsList = document.createElement('ul')
         notificationsList.setAttribute('class', 'notification-list')
 
-        let dot = document.createElement('li')
-        dot.setAttribute('class', 'notification-list-item')
-        notificationsList.appendChild(dot)
+        let dotItem = document.createElement('li')
+        dotItem.setAttribute('class', 'notification-list-item')
+        notificationsList.appendChild(dotItem)
 
         
 
@@ -113,7 +117,32 @@ window.onload = function (){
 
 
         document.body.appendChild(notification)
+
+// events at info notification
+
+    document.querySelector('body').addEventListener('click', (e) => {
+    // close info notification
+        if (e.target.className === 'notification-controls-close') {
+            document.querySelector('.notification').classList.add('hide')
+            e.stopPropagation()
+        }
+
+    // disable info notification
     
+        if (e.target.className === 'notification-checkbox') {
+            if (window.localStorage.getItem('displayInfoNotification')) {
+                window.localStorage.removeItem('displayInfoNotification')
+            } else {
+                window.localStorage.setItem('displayInfoNotification', true)
+            }      
+            
+            e.stopPropagation()
+        }
+
+    })
+
+
+
     }
     
 }
