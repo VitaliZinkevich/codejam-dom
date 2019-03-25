@@ -14,5 +14,7 @@ function FindLongestString (sen){
     return longestWord
 }
 
-console.log(FindLongestString("my favorite juice is grapefruit"))
-console.log(FindLongestString("They often help us"))
+function WordReverse (str){
+    return str.split('').reverse().join('')
+}
+
