@@ -84,3 +84,8 @@ cursor: pointer;
 .hide {
 display: none;
 }
+
+
+.notification-list-item.current {
+  background-color: #000000;
+}
